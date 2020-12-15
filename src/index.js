@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const { alert, error } = require('@pnotify/core');
-import { data } from 'autoprefixer';
+
 import '../node_modules/@pnotify/core/dist/Angeler.css'
 import '../node_modules/@pnotify/core/dist/BrightTheme.css'
 import '../node_modules/@pnotify/core/dist/Material.css'
@@ -27,7 +27,7 @@ inputRef.addEventListener('input', _.debounce((event) => {
             } else if (data.length === 1) {
                 updateCountry(data);
 
-            } else { error({ text: "Too many matches found. Please enter a more specific query!", delay: 1500 }) };
+            } else { error({ text: "Too many matches found. Please enter a more specific query!", delay: 1000 }) };
         });
     } else { error({ text: "Empty request!", delay: 1500 }) };    
     
