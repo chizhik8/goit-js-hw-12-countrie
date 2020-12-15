@@ -12,6 +12,9 @@ import listOfCountry from './templates/list-country.hbs';
 
 const inputRef = document.getElementById('name-input');
 const outputRef = document.getElementById('country-box');
+// const countryItemRef = document.querySelector('.country-box__item');
+
+
 
 inputRef.addEventListener('input', _.debounce((event) => { 
     if (event.target.value.length) {
@@ -20,8 +23,10 @@ inputRef.addEventListener('input', _.debounce((event) => {
         fetchCountries(inputValue).then(data => {
             if (data.length > 1 && data.length < 11) {
                 updateCountries(data);
+               
             } else if (data.length === 1) {
                 updateCountry(data);
+
             } else { error({ text: "Too many matches found. Please enter a more specific query!", delay: 1500 }) };
         });
     } else { error({ text: "Empty request!", delay: 1500 }) };    
@@ -31,7 +36,9 @@ inputRef.addEventListener('input', _.debounce((event) => {
 function updateCountries(data) {
     const countries = listOfCountry(data);
     outputRef.insertAdjacentHTML('afterbegin', countries);
+
 }
+
 
 function updateCountry(data) {
      const country = singleCountry(data);
