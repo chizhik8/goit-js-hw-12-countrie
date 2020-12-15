@@ -13,9 +13,6 @@ import listOfCountry from './templates/list-country.hbs';
 const inputRef = document.getElementById('name-input');
 const outputRef = document.getElementById('country-box');
 
-// let liRefs = '';
-
-
 
 inputRef.addEventListener('input', _.debounce((event) => { 
     if (event.target.value.length) {
