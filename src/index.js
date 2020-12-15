@@ -12,7 +12,8 @@ import listOfCountry from './templates/list-country.hbs';
 
 const inputRef = document.getElementById('name-input');
 const outputRef = document.getElementById('country-box');
-// const countryItemRef = document.querySelector('.country-box__item');
+
+// let liRefs = '';
 
 
 
@@ -23,20 +24,28 @@ inputRef.addEventListener('input', _.debounce((event) => {
         fetchCountries(inputValue).then(data => {
             if (data.length > 1 && data.length < 11) {
                 updateCountries(data);
-               
+                const liRefs = document.querySelectorAll('li');
+                liRefs.forEach(liRef => {
+                    liRef.addEventListener('click', event => {
+                        outputRef.innerHTML = '';                   
+                        const getCountry = (data, name) => data.find( i => i.name === name);
+                        let countryObj = getCountry(data, event.target.outerText);
+                        updateCountry([countryObj]);
+                    });
+                });
             } else if (data.length === 1) {
                 updateCountry(data);
+                
 
             } else { error({ text: "Too many matches found. Please enter a more specific query!", delay: 1000 }) };
         });
-    } else { error({ text: "Empty request!", delay: 1500 }) };    
+    } else { error({ text: "Empty request!", delay: 1000 }) };    
     
 }), 2000);
 
 function updateCountries(data) {
     const countries = listOfCountry(data);
     outputRef.insertAdjacentHTML('afterbegin', countries);
-
 }
 
 
